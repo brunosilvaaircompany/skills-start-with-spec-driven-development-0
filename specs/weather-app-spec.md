@@ -2,18 +2,18 @@
 
 ## Estado da spec
 
-- **Versão:** 1.0
+- **Versão:** 1.1
 - **Baseline:** busca de cidade e clima atual
-- **Última decisão:** previsões futuras permanecem fora do escopo desta versão
+- **Última decisão:** acrescentar previsão diária de 7 dias; previsão horária permanece fora de escopo
 
 ## Escopo
 
-Aplicação web estática para buscar cidades e consultar o clima atual usando a
-Open-Meteo, sem autenticação.
+Aplicação web estática para buscar cidades, consultar o clima atual e a
+previsão diária dos próximos 7 dias usando a Open-Meteo, sem autenticação.
 
 ## Fora de escopo
 
-- Previsão diária ou horária.
+- Previsão horária.
 - Geolocalização automática.
 - Histórico persistido e cidades favoritas.
 - Notificações e múltiplos idiomas.
@@ -49,12 +49,19 @@ Open-Meteo, sem autenticação.
 - **CA4.2:** O código WMO 95 representa "Tempestade".
 - **CA4.3:** Um código desconhecido representa "Condição desconhecida".
 
+### F5: Previsão diária de 7 dias
+
+- **CA5.1:** DADO uma localização selecionada, QUANDO o clima for carregado, ENTÃO exatamente 7 dias de previsão são apresentados.
+- **CA5.2:** DADO um dia da previsão, QUANDO ele for apresentado, ENTÃO suas temperaturas máxima e mínima são exibidas em Celsius.
+- **CA5.3:** DADO um dia da previsão, QUANDO ele for apresentado, ENTÃO sua condição climática WMO possui descrição e representação visual.
+
 ## Contrato observável
 
 - Campo de busca: `searchbox` com nome acessível "Nome da cidade".
 - Ação de busca: botão "Buscar", desabilitado quando o campo está vazio.
 - Resultado: botão com nome acessível "Selecionar {cidade}, {país}".
 - Clima atual: região com nome acessível "Clima atual para {cidade}".
+- Previsão diária: região com nome acessível "Previsão de 7 dias para {cidade}", contendo exatamente sete entradas.
 - Erros: elementos com `role="alert"`.
 
 ## Histórico
@@ -62,3 +69,4 @@ Open-Meteo, sem autenticação.
 | Versão | Mudança | Critérios |
 |---|---|---|
 | 1.0 | Baseline de busca e clima atual | CA1.1–CA4.3 |
+| 1.1 | Previsão diária dos próximos 7 dias | CA5.1–CA5.3 |
