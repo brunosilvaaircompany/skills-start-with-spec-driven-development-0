@@ -29,6 +29,11 @@ export async function fetchWeather(location: Location): Promise<WeatherData> {
     "current",
     "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m",
   );
+  url.searchParams.set(
+    "daily",
+    "temperature_2m_max,temperature_2m_min,weather_code",
+  );
+  url.searchParams.set("forecast_days", "7");
   url.searchParams.set("timezone", "auto");
 
   const response = await fetch(url.toString());
@@ -37,5 +42,5 @@ export async function fetchWeather(location: Location): Promise<WeatherData> {
   }
 
   const data = await response.json();
-  return { location, current: data.current };
+  return { location, current: data.current, daily: data.daily };
 }
