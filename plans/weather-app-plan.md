@@ -2,7 +2,7 @@
 
 ## Baseline
 
-Este plano implementa a versão 1.0 da spec. Mudanças futuras devem atualizar
+Este plano implementa a versão 1.1 da spec. Mudanças futuras devem atualizar
 este documento por análise de impacto antes de alterar tasks ou código.
 
 ## Arquitetura
@@ -57,3 +57,38 @@ O modelo da baseline não contém dados diários.
 
 Validação vermelha produz feedback para o planning agent. O agente atualiza
 primeiro este plano e coordena os deltas derivados antes de nova implementação.
+
+## Delta F5: previsão diária de 7 dias
+
+### Análise de impacto
+
+| Superfície | Impacto mínimo |
+|---|---|
+| `WeatherData` | Acrescentar `daily` com arrays de data, máxima, mínima e código WMO |
+| Open-Meteo Forecast | Solicitar `daily=temperature_2m_max,temperature_2m_min,weather_code`, `timezone=auto` e `forecast_days=7` |
+| `WeatherCard` | Preservar a região de clima atual e acrescentar uma região acessível com sete entradas diárias |
+| Testes | Usar fixtures com valores distintos e provar serviço, componente e jornada E2E |
+
+Os arrays de `daily` são relacionados pelo mesmo índice: `time[i]`,
+`temperature_2m_max[i]`, `temperature_2m_min[i]` e `weather_code[i]`
+representam o mesmo dia.
+
+### Decisões do delta
+
+| Decisão | Escolha | Alternativa descartada | Motivo |
+|---|---|---|---|
+| Modelo Diário | Estender `WeatherData` com os arrays retornados pela API | Criar uma segunda árvore de estado | Mantém clima atual e previsão na mesma resposta |
+| Período | `forecast_days=7` | Cortar um retorno maior na UI | O contrato é aplicado na fronteira externa |
+| Campos | Solicitar apenas máxima, mínima e `weather_code` | Solicitar todos os campos diários | Evita dados sem requisito |
+| Apresentação | Estender `WeatherCard` | Criar outro fluxo de seleção | Preserva a jornada existente |
+
+### Estratégia de testes do delta
+
+| Critério | Serviço | Componente | E2E |
+|---|---|---|---|
+| CA5.1 | Prova `forecast_days=7` e sete datas retornadas | Prova exatamente sete entradas | Prova sete entradas após busca e seleção |
+| CA5.2 | Prova os arrays `temperature_2m_max` e `temperature_2m_min` | Prova máxima e mínima associadas a cada dia | Prova máxima e mínima na jornada |
+| CA5.3 | Prova o array `weather_code` | Prova descrição e representação WMO por dia | Prova a condição na jornada |
+
+A cobertura de F2 permanece nos testes existentes de serviço, componente e
+E2E para detectar regressão do clima atual.
