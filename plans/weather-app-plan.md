@@ -102,3 +102,58 @@ property: toHaveSize`. Os asserts de unicidade dos sete dias não chegaram a
 ser executados. O teste foi ajustado para comparar a propriedade `.size` dos
 `Set`s, e a nova execução passou com 5 testes em 5. O serviço e o contrato
 diário ficam validados no nível de serviço para T9.
+
+## Iteração por feedback
+
+### Comando e sintomas
+
+`pnpm lint` passou, `pnpm build` passou, `pnpm test` passou com 23 testes e
+`pnpm test:e2e` ficou vermelho com 3 de 5 cenários aprovados. O cenário F5
+esperava `Nublado` para o código WMO 3, mas a implementação apresenta
+`Encoberto`. O cenário CA2.5 não encontrou o card de clima atual após liberar a
+resposta porque seu fixture específico contém `current`, mas não contém
+`daily`.
+
+### Hipótese
+
+Os dois sintomas pertencem ao contrato dos fixtures E2E, não à Spec: a primeira
+expectativa diverge do mapeamento WMO existente e a segunda resposta deixou de
+ser compatível com `WeatherData` após a inclusão da previsão diária.
+
+### Decisão mínima
+
+Manter a Spec e os IDs existentes. Ajustar a expectativa do código 3 para
+`Encoberto` e fazer o fixture de loading retornar a mesma estrutura `daily` de
+sete entradas usada pelo forecast determinístico. Não alterar produção nem
+criar novos critérios.
+
+### Artefatos derivados
+
+- `e2e/search.spec.ts`: corrigir a descrição esperada e completar o fixture do
+    cenário CA2.5.
+- `feedback/7-day-forecast-loop.md`: preservar os estados observados e a
+    decisão desta iteração.
+- `tasks/weather-app-tasks.md`: manter T11 pendente até a validação completa.
+
+### Revalidação esperada
+
+Executar novamente `pnpm test:e2e` e, após o E2E ficar verde, repetir `pnpm
+lint`, `pnpm build`, `pnpm test`, `pnpm test:e2e`, `pnpm validate:sdd feedback` e
+`pnpm validate:sdd full`. T11 só poderá ser concluída quando toda a cadeia
+estiver verde.
+
+### Feedback da validação da cadeia
+
+`pnpm validate:sdd feedback` passou, mas `pnpm validate:sdd full` falhou porque
+`e2e/search.spec.ts` não referencia explicitamente `CA5.1`, `CA5.2` e `CA5.3`.
+Isso é uma lacuna de rastreabilidade no teste, não uma mudança de contrato.
+Antes da implementação, o teste deve identificar o cenário com essas três
+âncoras e manter, no mesmo cenário, as asserções de sete entradas, máxima e
+mínima e condição WMO que elas representam.
+
+### Resultado da revalidação
+
+Após os ajustes derivados, `pnpm test:e2e` passou com 5 de 5 cenários. A
+revalidação de `pnpm lint`, `pnpm build`, `pnpm test`, `pnpm validate:sdd
+feedback` e `pnpm validate:sdd full` também passou. A Spec e os IDs foram
+preservados, e T11 pode ser concluída.
