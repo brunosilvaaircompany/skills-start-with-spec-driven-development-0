@@ -3,7 +3,7 @@
 > Você não recebeu um repositório vazio. Antes de aceitar uma mudança, prove o
 > que já funciona e localize os contratos que descrevem esse comportamento.
 
-<img src="../images/inspectocat.png" alt="Inspectocat examinando o projeto" width="140" align="right">
+<img src="https://github.com/brunosilvaaircompany/skills-start-with-spec-driven-development-0/blob/main/.github/images/inspectocat.png?raw=true" alt="Inspectocat examinando o projeto" width="140" align="right">
 
 Uma pessoa usuária pediu a previsão dos próximos 7 dias. A reação mais rápida
 seria abrir o componente e começar a programar. Neste exercício, você fará algo

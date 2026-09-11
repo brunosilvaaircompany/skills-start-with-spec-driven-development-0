@@ -3,7 +3,7 @@
 > Entregue ao agente uma única task aprovada. Ele implementa a fatia; você
 > controla o contexto, o escopo e a evidência.
 
-<img src="../images/manufacturetocat.png" alt="Manufacturetocat construindo a implementação" width="140" align="right">
+<img src="https://github.com/brunosilvaaircompany/skills-start-with-spec-driven-development-0/blob/main/.github/images/manufacturetocat.png?raw=true" alt="Manufacturetocat construindo a implementação" width="140" align="right">
 
 F5 é a previsão dos próximos 7 dias. CA5.1 exige exatamente sete dias, CA5.2
 exige máxima e mínima por dia e CA5.3 exige a condição WMO correspondente. Esta

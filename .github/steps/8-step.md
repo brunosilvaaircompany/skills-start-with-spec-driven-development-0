@@ -3,7 +3,7 @@
 > Agora execute todas as validações. O resultado decide o próximo caminho, mas
 > qualquer caminho vermelho entra novamente pelo planejamento.
 
-<img src="../images/inflatocat.png" alt="Inflatocat durante a etapa de validação" width="140" align="right">
+<img src="https://github.com/brunosilvaaircompany/skills-start-with-spec-driven-development-0/blob/main/.github/images/inflatocat.png?raw=true" alt="Inflatocat durante a etapa de validação" width="140" align="right">
 
 Uma primeira implementação pode passar ou falhar. O aprendizado deste step não
 depende de fabricar um defeito: ele está em tratar o resultado como evidência e

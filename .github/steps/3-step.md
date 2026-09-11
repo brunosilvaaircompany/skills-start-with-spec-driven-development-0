@@ -3,7 +3,7 @@
 > A especificação agora diz o que mudou. O planejamento decide como encaixar essa mudança no
 > sistema existente sem apagar decisões anteriores.
 
-<img src="../images/Professortocat_v2.png" alt="Professortocat orientando o planejamento" width="130" align="right">
+<img src="https://github.com/brunosilvaaircompany/skills-start-with-spec-driven-development-0/blob/main/.github/images/Professortocat_v2.png?raw=true" alt="Professortocat orientando o planejamento" width="130" align="right">
 
 Na nova funcionalidade (F5), a previsão diária dos próximos 7 dias, parece pequena na interface, mas seus
 dados atravessam várias camadas. Este é o momento de tornar esse impacto

@@ -3,7 +3,7 @@
 _Parabéns! Você evoluiu um produto existente sem perder a intenção que já estava
 registrada._
 
-<img src="../images/jetpacktocat.png" alt="Jetpacktocat celebrando a conclusão" width="180" align="right">
+<img src="https://github.com/brunosilvaaircompany/skills-start-with-spec-driven-development-0/blob/main/.github/images/jetpacktocat.png?raw=true" alt="Jetpacktocat celebrando a conclusão" width="180" align="right">
 
 Você começou com um Weather App funcional e terminou com um incremento completo.
 O valor do exercício está no diff entre os dois estados.
