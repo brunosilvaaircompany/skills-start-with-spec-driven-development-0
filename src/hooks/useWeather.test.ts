@@ -24,6 +24,12 @@ const weather: WeatherData = {
     wind_speed_10m: 10,
     relative_humidity_2m: 62,
   },
+  daily: {
+    time: ["2026-09-11"],
+    temperature_2m_max: [24],
+    temperature_2m_min: [14],
+    weather_code: [1],
+  },
 };
 
 describe("useWeather", () => {

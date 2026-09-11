@@ -92,3 +92,13 @@ representam o mesmo dia.
 
 A cobertura de F2 permanece nos testes existentes de serviço, componente e
 E2E para detectar regressão do clima atual.
+
+## Feedback da validação de T9
+
+O teste focado `pnpm vitest run src/services/weather.test.ts` ficou vermelho:
+4 testes passaram e 1 falhou. A falha ocorreu no teste de T9 ao usar o matcher
+`toHaveSize` em um `Set`; o setup atual do Vitest/Chai reportou `Invalid Chai
+property: toHaveSize`. Os asserts de unicidade dos sete dias não chegaram a
+ser executados. O teste foi ajustado para comparar a propriedade `.size` dos
+`Set`s, e a nova execução passou com 5 testes em 5. O serviço e o contrato
+diário ficam validados no nível de serviço para T9.
