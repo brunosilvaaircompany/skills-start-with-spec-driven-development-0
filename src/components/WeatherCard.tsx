@@ -9,6 +9,13 @@ interface WeatherCardProps {
 export function WeatherCard({ data }: WeatherCardProps) {
   const { location, current } = data;
   const description = getWmoDescription(current.weather_code);
+  const formatDate = (date: string) =>
+    new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(`${date}T00:00:00Z`));
 
   return (
     <section
@@ -48,6 +55,43 @@ export function WeatherCard({ data }: WeatherCardProps) {
           {current.relative_humidity_2m}%
         </p>
       </div>
+
+      <section
+        className="mt-6 border-t border-gray-100 pt-4"
+        aria-label={`Previsão de 7 dias para ${location.name}`}
+      >
+        <h3 className="text-lg font-semibold text-gray-800">Próximos 7 dias</h3>
+        <ul className="mt-3 space-y-3">
+          {data.daily.time.map((date, index) => {
+            const dailyDescription = getWmoDescription(
+              data.daily.weather_code[index],
+            );
+
+            return (
+              <li
+                className="grid grid-cols-[1fr_auto_auto] items-center gap-3 text-sm text-gray-600"
+                key={date}
+              >
+                <time dateTime={date}>{formatDate(date)}</time>
+                <span>
+                  Máx.{" "}
+                  {formatTemperature(data.daily.temperature_2m_max[index], "C")}
+                </span>
+                <span>
+                  Mín.{" "}
+                  {formatTemperature(data.daily.temperature_2m_min[index], "C")}
+                </span>
+                <span className="col-span-3 flex items-center gap-2">
+                  <span role="img" aria-label={dailyDescription}>
+                    {getWmoEmoji(data.daily.weather_code[index])}
+                  </span>
+                  {dailyDescription}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </section>
   );
 }
