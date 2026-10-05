@@ -10,7 +10,7 @@ on:
       - "review/7-day-forecast.md"
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
 
