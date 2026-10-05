@@ -17,4 +17,4 @@
 
 ## Resumo
 
-A mudança está pronta para PR. O diff foi revisado e a validação final passou em `pnpm lint`, `pnpm build`, `pnpm test` (6 arquivos, 23 testes), `pnpm test:e2e` (5 de 5 cenários), `pnpm validate:sdd feedback` e `pnpm validate:sdd full`. Não há achados bloqueantes. O risco residual é a dependência da estrutura diária fornecida pela API Open-Meteo em produção; os fixtures interceptados cobrem o contrato esperado de sete entradas. 
+A mudança está pronta para PR. O diff foi revisado e a validação final passou em `pnpm lint`, `pnpm build`, `pnpm test` (6 arquivos, 23 testes), `pnpm test:e2e` (5 de 5 cenários), `pnpm validate:sdd feedback` e `pnpm validate:sdd full`. Não há achados bloqueantes. O risco residual é a dependência da estrutura diária fornecida pela API Open-Meteo em produção; os fixtures interceptados cobrem o contrato esperado de sete entradas.
